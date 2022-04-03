@@ -2,9 +2,12 @@ package hello.core.member;
 
 public class MemberServiceImpl implements MemberService {
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
-//    MemberServiceImpl은 MemberRepository, MemoryMemberRepository (추상화, 구체화) 모두 의존하고 있음
-//    DIP 위반
+    private final MemberRepository memberRepository;
+
+    public MemberServiceImpl(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
+    // 생성자를 통해서 MemberRepository의 구현체를 설정한다. AppConfig에서 설정됨.
 
     @Override
     public void join(Member member) {
